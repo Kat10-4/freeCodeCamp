@@ -22,6 +22,23 @@ const weapons = [
   { name: "claw hammer", power: 50 },
   { name: "sword", power: 100 },
 ];
+const monsters = [
+  {
+    name: "slime",
+    level: 2,
+    health: 15,
+  },
+  {
+    name: "fanged beast",
+    level: 8,
+    health: 60,
+  },
+  {
+    name: "dragon",
+    level: 20,
+    health: 300,
+  },
+];
 const locations = [
   {
     name: "town square",
@@ -59,13 +76,8 @@ const locations = [
       "Go to town square",
     ],
     "button functions": [goTown, goTown, goTown],
-    text: "The monster screams 'Arg!' as it dies. You gain experience points and find gold.",
+    text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.',
   },
-];
-const monsters = [
-  { name: "slime", level: 2, health: 15 },
-  { name: "fanged beast", level: 8, health: 60 },
-  { name: "dragon", level: 20, health: 300 },
 ];
 
 // initialize buttons
@@ -105,16 +117,17 @@ function buyHealth() {
     text.innerText = "You do not have enough gold to buy health.";
   }
 }
+
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
       gold -= 30;
-      goldText.innerText = gold;
       currentWeapon++;
+      goldText.innerText = gold;
       let newWeapon = weapons[currentWeapon].name;
       text.innerText = "You now have a " + newWeapon + ".";
       inventory.push(newWeapon);
-      text.innerText += "In your inventory you have:" + inventory;
+      text.innerText += " In your inventory you have: " + inventory;
     } else {
       text.innerText = "You do not have enough gold to buy a weapon.";
     }
@@ -137,12 +150,14 @@ function sellWeapon() {
   }
 }
 
-function goFight() {
-  update(locations[3]);
-  monsterHealth = monsters[fighting].health;
-  monsterStats.style.display = "block";
-  monsterName.innerText = monsters[fighting].name;
-  monsterHealthText.innerText = monsterHealth;
+function fightSlime() {
+  fighting = 0;
+  goFight();
+}
+
+function fightBeast() {
+  fighting = 1;
+  goFight();
 }
 
 function fightDragon() {
@@ -150,13 +165,12 @@ function fightDragon() {
   goFight();
 }
 
-function fightSlime() {
-  fighting = 0;
-  goFight();
-}
-function fightBeast() {
-  fighting = 1;
-  goFight();
+function goFight() {
+  update(locations[3]);
+  monsterHealth = monsters[fighting].health;
+  monsterStats.style.display = "block";
+  monsterName.innerText = monsters[fighting].name;
+  monsterHealthText.innerText = monsterHealth;
 }
 
 function attack() {
@@ -176,11 +190,9 @@ function attack() {
 }
 
 function dodge() {
-  text.innerText =
-    "You dodge the attack from the " + monsters[fighting].name + ".";
+  text.innerText = "You dodge the attack from the " + monsters[fighting].name;
 }
 
-function lose() {}
 function defeatMonster() {
   gold += Math.floor(monsters[fighting].level * 6.7);
   xp += monsters[fighting].level;
@@ -188,3 +200,5 @@ function defeatMonster() {
   xpText.innerText = xp;
   update(locations[4]);
 }
+
+function lose() {}
