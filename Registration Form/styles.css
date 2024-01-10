@@ -48,3 +48,13 @@ textarea {
   border: 1px solid #0a0a23;
   color: #ffffff;
 }
+input[type="submit"] {
+  display: block;
+  width: 60%;
+  min-width: 300px;
+  margin: 1em auto;
+  height: 2em;
+  font-size: 1.1rem;
+  background-color: #3b3b4f;
+  border-color: white;
+}
