@@ -39,7 +39,26 @@
           <legend>Exercise</legend>
           <div class="input-container"></div>
         </fieldset>
+        <div class="controls">
+          <span
+            ><label for="entry-dropdown">Add food or exercise:</label
+            ><select id="entry-dropdown" name="options">
+              <option value="breakfast" selected>Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+              <option value="snacks">Snacks</option>
+              <option value="exercise">Exercise</option>
+            </select>
+            <button id="add-entry" type="button">Add Entry</button></span
+          >
+        </div>
+        <div>
+          <button type="submit">Calculate Remaining Calories</button>
+          <button id="clear" type="button">Clear</button>
+        </div>
+        <div id="output" class="output hide"></div>
       </form>
     </main>
+    <script src="./script.js"></script>
   </body>
 </html>
